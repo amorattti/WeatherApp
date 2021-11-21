@@ -10,7 +10,7 @@ import { throwError } from 'rxjs';
 
 export class WeatherService {
     keyApi: string = '148ab12495a9f1a901fe6056090a7487';
-    kepApi2: string = 'a42dd92cab5f40c49a0b67f304d63cc4';
+    kepApi2: string = '769a9af271f24087b60e4b295e71df3e';
 
     constructor(private httpClient: HttpClient) { }
 
