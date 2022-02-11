@@ -17,6 +17,11 @@
 	humidity: number;
 }
 
+interface Wind {
+	speed: number;
+	deg: number;
+}
+
 interface Sys {
 	country: string;
 	sunrise: number;
@@ -27,6 +32,7 @@ export interface CurrentWeather {
 	coord: Coord;
 	weather: Weather[];
 	main: Main;
+	wind: Wind;
 	dt: number;
 	sys: Sys;
 	timezone: number;

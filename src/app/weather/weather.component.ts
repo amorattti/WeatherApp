@@ -36,9 +36,9 @@ export class WeatherComponent implements OnInit {
         }
 
         navigator.geolocation.getCurrentPosition((position) => {
-            const longitude = position.coords.longitude.toString();
-            const latitude = position.coords.latitude.toString();
-            
+            const longitude = position.coords.longitude;
+            const latitude = position.coords.latitude;
+
             this.api.sendGETRequestByGeoCoords(longitude, latitude, this.currentWeather, this.formatTemp).subscribe((data: CurrentWeather) => {
                 this.weather = data;
                 this.currentCity = data.name;

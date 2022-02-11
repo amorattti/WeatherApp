@@ -1,4 +1,4 @@
- 
+
  interface Weather {
 	icon: string;
 	code: number;

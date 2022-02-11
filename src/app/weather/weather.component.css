@@ -111,10 +111,6 @@ header {
     outline: none;
 }
 
-.replacement-content span {
-    font-family: monospace;
-}
-
 .replacement-content 
 .button-location:active, 
 .button-location:focus {

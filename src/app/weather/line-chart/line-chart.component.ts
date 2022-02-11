@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Color, Label } from 'ng2-charts';
 import { WeatherService } from '../../core/services/weather.service';
-import { HourlyWeather, List } from '../../core/interfaces/hourlyWeather.model';
+
 
 @Component({
     selector: 'app-line-chart',
@@ -10,7 +10,7 @@ import { HourlyWeather, List } from '../../core/interfaces/hourlyWeather.model';
 
 export class LineChartComponent implements OnInit {
     private urlHourlyData: string = 'https://api.openweathermap.org/data/2.5/forecast?';  // Hourly forecast
-    HourlyWeather: List[];
+    WeatherHourlu: object;
     lineChartLegend: boolean = false;
     lineChartType: string  = 'line';
     barChartData = [{ data: [65, 59, 80, 81, 56, 55, 40], label: '' }];
@@ -45,18 +45,18 @@ export class LineChartComponent implements OnInit {
         this.getByCityNames(this.city, this.format);
     }
 
-    getByCityNames(city:string, matric:string) {
-        this.api.sendGETRequestByCityName(city, this.urlHourlyData, matric).subscribe((data: HourlyWeather) => {
-           this.HourlyWeather = data.list;
-        
+    getByCityNames(city, m) {
+        this.api.sendGETRequestByCityName(city, this.urlHourlyData, m).subscribe((data: any) => {
+            this.WeatherHourlu = data.list;
+
             let Labels = []
             let ChartData = []
             for (let i = 0; i < 6; i++) {
-                let d = new Date(this.HourlyWeather[i].dt * 1000);
+                let d = new Date(data.list[i].dt * 1000);
                 let h = this.addZero(d.getUTCHours());
                 let m = this.addZero(d.getUTCMinutes());
                 let template = [h + ":" + m];
-                let degreesTemplate = this.HourlyWeather[i].main.temp.toFixed(0);
+                let degreesTemplate = data.list[i].main.temp.toFixed(0);
 
                 Labels = [...Labels, ...template];
                 ChartData = [...ChartData, degreesTemplate]
@@ -66,7 +66,7 @@ export class LineChartComponent implements OnInit {
         })
     }
 
-    addZero(i:any) {
+    addZero(i) {
         if (i < 10) {
             i = "0" + i;
         }
